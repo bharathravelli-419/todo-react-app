@@ -1,7 +1,10 @@
 import { memo, useState } from "react";
 
+interface InputBoxProps{
+    addNewTask: (task: string) => void;
+}
 
-const InputBox: React.FC = memo(({ addNewTask }) => {
+const InputBox: React.FC<InputBoxProps> = memo(({ addNewTask }) => {
 
     const [inputText, setInputText] = useState<string>('');
     console.log('Input box component');

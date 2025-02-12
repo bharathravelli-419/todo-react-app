@@ -18,7 +18,7 @@ const App: React.FC = () => {
     });
   },[]);
 
-  const onModifyingTask= (prevValue:string, newValue: string)=>{
+  const onModifyingTask= useCallback((prevValue:string, newValue: string)=>{
     const index = openTasks.indexOf(prevValue);
     if(index !== -1 && (prevValue !== newValue)){
       const copiedOpenTasksArray: string[] = [...openTasks];
@@ -26,24 +26,28 @@ const App: React.FC = () => {
       setOpenTasks(copiedOpenTasksArray);
       console.log('Edited the Task', newValue);
     }
-  }
-  const deleteTask = (task:string)=>{
+  },[openTasks]);
+
+  const deleteTask = useCallback((task:string)=>{
     setOpenTasks((prevState)=> ([...prevState.filter(t=> t!== task)]));
-  }
-  const onTaskComplete= (task: sring)=>{
+  },[]);
+
+  const onTaskComplete= useCallback((task: string)=>{
     setOpenTasks((prevState)=>([...prevState.filter(t=> t!== task)]))
     setCompletedTasks((prevState)=>{
       return(
         [...prevState, task]
       );
     });
-  };
-  const onUndo=( task: string)=>{
+  },[]);
+
+  const onUndo= useCallback(( task: string)=>{
     setOpenTasks((prevState)=>{
       return prevState.indexOf(task) == -1 ? [task, ...prevState] : [...prevState];
     });
     setCompletedTasks((prevState)=> ([...prevState.filter(t=> t!== task)]));
-  }
+  },[]);
+
   console.log(openTasks);
   return (
     <div className="to-do-main-box">
