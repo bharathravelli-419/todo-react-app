@@ -1,6 +1,13 @@
 import OpenTask from "./OpenTask";
 
-const OpenTasks: React.FC = ({ openTasks, modifyAfterEdit, onDeleteTask , onTaskComplete}) => {
+interface OpenTasksProps{
+    openTasks: string [];
+    modifyAfterEdit: (prevValue: string, newValue: string) => void;
+    onDeleteTask: (task: string) => void;
+    onTaskComplete: (task: string) => void;
+}
+
+const OpenTasks: React.FC<OpenTasksProps>= ({ openTasks, modifyAfterEdit, onDeleteTask , onTaskComplete}) => {
 
     console.log('Open TaskS compoment SS');
     return (

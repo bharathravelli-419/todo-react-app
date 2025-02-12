@@ -1,9 +1,15 @@
+import { memo } from "react";
 
-const CompletedTasks: React.FC = ({completedTasks, onUndo}) => {
+interface CompletedTasksProps{
+    completedTasks: string[];
+    onUndo: (task: string) => void;
+}
+
+const CompletedTasks: React.FC<CompletedTasksProps> = memo(({completedTasks, onUndo}) => {
     console.log('Completed Tasks Component');
     return (
         <div className="completed-tasks-container">
-            <h4>Completed Tasks</h4>
+            <h4>Completed Tasks List :</h4>
             <ul>
                 {completedTasks.map((task: string) => {
                     return (
@@ -16,6 +22,6 @@ const CompletedTasks: React.FC = ({completedTasks, onUndo}) => {
             </ul>
         </div>
     );
-};
+});
 
 export default CompletedTasks;
