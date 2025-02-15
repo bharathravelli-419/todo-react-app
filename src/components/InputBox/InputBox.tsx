@@ -19,7 +19,8 @@ const InputBox: React.FC<InputBoxProps> = memo(({ addNewTask }) => {
     return (
         <div className="input-box-container">
             <input type="text" onChange={(e) => setInputText(e.target.value)} onKeyDown={(e) => {
-                e.key === 'Enter' && onAddNewTask()
+                if(e.key === 'Enter')
+                     onAddNewTask();
          }} value={inputText} />
             <button onClick={onAddNewTask}>Add Task</button>
         </div>
