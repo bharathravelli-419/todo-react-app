@@ -1,5 +1,5 @@
 import OpenTask from "./OpenTask";
-
+import "./OpenTasks.css";
 interface OpenTasksProps{
     openTasks: string [];
     modifyAfterEdit: (prevValue: string, newValue: string) => void;

@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-
+import "./InputBox.css"
 interface InputBoxProps{
     addNewTask: (task: string) => void;
 }

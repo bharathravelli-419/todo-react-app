@@ -1,9 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import InputBox from './components/InputBox/InputBox';
 import OpenTasks from './components/OpeneTasks/OpenTasks';
 import CompletedTasks from './components/CompletedTasks/CompletedTasks';
+import { addNewTask, completeATask, deleteATask, undoATask, updateATask } from './backend-api/usersTodo';
+import axios from 'axios';
 
 const App: React.FC = () => {
 
@@ -16,6 +18,7 @@ const App: React.FC = () => {
         return [task,...prevState];
       return [...prevState];
     });
+    addNewTask(task);
   },[]);
 
   const onModifyingTask= useCallback((prevValue:string, newValue: string)=>{
@@ -25,11 +28,13 @@ const App: React.FC = () => {
       copiedOpenTasksArray[index] = newValue;
       setOpenTasks(copiedOpenTasksArray);
       console.log('Edited the Task', newValue);
+      updateATask(newValue, prevValue);
     }
   },[openTasks]);
 
   const deleteTask = useCallback((task:string)=>{
     setOpenTasks((prevState)=> ([...prevState.filter(t=> t!== task)]));
+    deleteATask(task);
   },[]);
 
   const onTaskComplete= useCallback((task: string)=>{
@@ -39,6 +44,7 @@ const App: React.FC = () => {
         [...prevState, task]
       );
     });
+    completeATask(task);
   },[]);
 
   const onUndo= useCallback(( task: string)=>{
@@ -46,6 +52,16 @@ const App: React.FC = () => {
       return prevState.indexOf(task) == -1 ? [task, ...prevState] : [...prevState];
     });
     setCompletedTasks((prevState)=> ([...prevState.filter(t=> t!== task)]));
+    undoATask(task);
+  },[]);
+  
+  useEffect(()=>{
+    const setTasksInit = async()=>{
+      const response = await axios.get("http://localhost:8080/get-user-data?userId=user123");
+    setOpenTasks(response.data.openTodos);
+    setCompletedTasks(response.data.completedTodos);
+    };
+    setTasksInit();
   },[]);
 
   console.log(openTasks);

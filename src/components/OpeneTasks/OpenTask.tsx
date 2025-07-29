@@ -14,13 +14,13 @@ const OpenTask: React.FC<OpenTaskProps> = memo(({ task, modifyAfterEdit, onDelet
     console.log('OpenTask component', task);
 
     return (
-        <>
-            <input type="checkbox" onChange={(e) => {
+        <div className="open-task-box">
+            <input className="open-task-check-box" type="checkbox" onChange={(e) => {
                 if (e.target.checked) {
                     onTaskComplete(task);
                 }
             }} />
-            <button onClick={() => {
+            <button className="open-task-edit-btn" onClick={() => {
                 if (isEdting) {
                     if (editInput.trim() !== '')
                         modifyAfterEdit(task, editInput)
@@ -29,9 +29,9 @@ const OpenTask: React.FC<OpenTaskProps> = memo(({ task, modifyAfterEdit, onDelet
                 }
                 setIsEditing(true);
             }}>{isEdting ? 'Save' : 'Edit'}</button>
-            <input type="text" disabled={!isEdting} value={isEdting ? editInput : task} onChange={(e) => setEditInput(e.target.value)} />
-            <button onClick={() => onDeleteTask(task)}  >Delete</button>
-        </>
+            <input className="open-task-input" type="text" disabled={!isEdting} value={isEdting ? editInput : task} onChange={(e) => setEditInput(e.target.value)} />
+            <button className="open-task-delete-btn" onClick={() => onDeleteTask(task)}  >Delete</button>
+        </div>
     )
 });
 

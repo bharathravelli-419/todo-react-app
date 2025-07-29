@@ -1,0 +1,42 @@
+.open-tasks-container{
+    display: flex;
+    flex-direction: column;
+    ul{
+        li{
+            list-style: none;
+        }
+    }
+    h4{
+        margin-left: 45px;
+    }
+
+    .open-task-box{
+        width: 400px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 100px;
+        
+        .open-task-edit-btn{
+            height: 45px;
+            width: 55px;
+
+        }
+        .open-task-check-box{
+            height: 45px;
+            width: 55px;
+        }
+        .open-task-delete-btn{
+            height: 45px;
+            width: 55px;
+        }
+
+        .open-task-input{
+            height: 40px;
+            width: 300px;
+        }
+
+    }
+}
